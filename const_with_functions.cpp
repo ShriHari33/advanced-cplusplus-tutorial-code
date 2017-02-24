@@ -26,7 +26,17 @@ public:
     void setAge(const int& a)
     {
         age = a;
+        cout<<"Age set using const setAge function"<<endl;
     }
+
+    /*
+     * We pass a non-const reference
+     */
+     void setAge(int& a)
+     {
+        age = a;
+        cout << "Age set using non-const setAge function"<<endl;
+     }
 
     /*
      * const return value
@@ -39,6 +49,10 @@ public:
      {
          return name;
      }
+
+     // const functions
+     void printDogName() const{ cout << name << " const" <<endl; }
+     void printDogName(){ cout << name << " non-const" << endl; }
 };
 
 
@@ -50,6 +64,16 @@ int main()
 
     const string& name = d.getName(); // name cannot be modified
     cout<<name<<endl;
+
+    const Dog d2;
+
+    d.printDogName();       // non-const version of the function printDogName() invoked
+    d2.printDogName();      // const version of the function printDogName() invoked
+
+
+    d.setAge(2);            // setAge(const int& age) invoked because a r value has been passed.
+    int age = 5;
+    d.setAge(age);          // setAge(int& age) invoked because a l value has been passed.
 
     return 0;
 }
